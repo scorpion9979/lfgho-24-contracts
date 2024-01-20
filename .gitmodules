@@ -4,3 +4,9 @@
 [submodule "modules/v2-core"]
 	path = modules/v2-core
 	url = https://github.com/sablier-labs/v2-core
+[submodule "modules/openzeppelin-contracts"]
+	path = modules/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "modules/prb-math"]
+	path = modules/prb-math
+	url = https://github.com/PaulRBerg/prb-math
