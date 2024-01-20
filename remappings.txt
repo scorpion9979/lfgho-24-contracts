@@ -1,2 +1,3 @@
 ds-test/=modules/forge-std/lib/ds-test/src/
 forge-std/=modules/forge-std/src/
+sablier-v2/=modules/v2-core/src/

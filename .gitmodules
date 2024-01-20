@@ -1,3 +1,6 @@
 [submodule "modules/forge-std"]
 	path = modules/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "modules/v2-core"]
+	path = modules/v2-core
+	url = https://github.com/sablier-labs/v2-core
