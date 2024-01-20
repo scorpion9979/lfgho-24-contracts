@@ -1,0 +1,17 @@
+repos:
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: 4d4f39b551e434f582c8a15da6d7d08df0d642a0
+    hooks:
+      - id: "commitlint"
+        description: "Lint the latest commit message"
+        additional_dependencies: ["@commitlint/config-conventional"]
+        stages: ["commit-msg"]
+  - repo: "local"
+    hooks:
+      - id: "lint"
+        name: "lint"
+        description: "Lint the Solidity code"
+        language: "system"
+        stages: ["commit"]
+        entry: "make fmt-check"
+        pass_filenames: false
