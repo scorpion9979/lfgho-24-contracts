@@ -10,3 +10,6 @@
 [submodule "modules/prb-math"]
 	path = modules/prb-math
 	url = https://github.com/PaulRBerg/prb-math
+[submodule "modules/gho-core"]
+	path = modules/gho-core
+	url = https://github.com/aave/gho-core

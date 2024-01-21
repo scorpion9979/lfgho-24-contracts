@@ -3,3 +3,4 @@ forge-std/=modules/forge-std/src/
 @sablier/v2-core/=modules/v2-core/
 @openzeppelin/contracts/=modules/openzeppelin-contracts/contracts/
 @prb/math/=modules/prb-math/
+gho-core/=modules/gho-core/src/contracts/
