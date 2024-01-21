@@ -31,9 +31,16 @@ contract Sablier_CDP_Facilitator {
     /// @param sablierLockup The Sablier lockup contract to be used.
     /// @param ids The ids of the Sablier NFTs to be deposited.
     function deposit(ISablierV2Lockup sablierLockup, uint256[] calldata ids) external {
-        // TODO: check that `sablierLockup` is whitelisted.
-        // TODO: check that the Sablier stream is non-cancelable.
-        // TODO: check that MAX_COLLATERAL is not exceeded.
+        // Check that `sablierLockup` is whitelisted.
+        require(sablierNFTPriceEngine.isWhitelisted(sablierLockup), "Sablier lockup not whitelisted");
+
+        // Check that the Sablier stream is non-cancelable.
+        for (uint256 i = 0; i < ids.length; i++) {
+            require(!sablierLockup.isCancelable(ids[i]), "Sablier stream is cancelable");
+        }
+
+        // Check that MAX_COLLATERAL is not exceeded.
+        require(ids.length + collateral[msg.sender].length <= MAX_COLLATERAL, "Too many NFTs deposited");
         for (uint256 i = 0; i < ids.length; i++) {
             // Effect: transfer the NFT from the user to the contract.
             sablierLockup.transferFrom(msg.sender, address(this), ids[i]);
