@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import { ISablierV2Lockup } from "@sablier/v2-core/src/interfaces/ISablierV2Lockup.sol";
 import { IERC20Metadata as IERC20 } from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import { ChainlinkOperator as ERC20PriceEngine } from "./ChainlinkOperator.sol";
+import { Types } from "./libraries/Types.sol";
 
 /// @title SablierNFTPriceEngine
 /// @notice Provides price data for Sablier NFTs.
@@ -15,15 +15,9 @@ contract SablierNFTPriceEngine {
         erc20PriceEngine = _erc20PriceEngine;
     }
 
-    /// @notice The Sablier NFT struct.
-    struct SablierNFT {
-        ISablierV2Lockup sablier;
-        uint256 id;
-    }
-
     /// @notice Returns the normalized price of a Sablier NFT.
     /// @param sablierNFT The Sablier NFT to be priced.
-    function getNormalizedValue(SablierNFT calldata sablierNFT) public view returns (uint256) {
+    function getNormalizedValue(Types.SablierNFT calldata sablierNFT) public view returns (uint256) {
         IERC20 erc20Asset = IERC20(address(sablierNFT.sablier.getAsset(sablierNFT.id)));
         uint256 normalizedER20Price = erc20PriceEngine.getNormalizedPrice(erc20Asset.symbol());
         uint256 lockedAmount =
@@ -34,7 +28,7 @@ contract SablierNFTPriceEngine {
 
     /// @notice Returns the normalized price of a collection of Sablier NFTs.
     /// @param sablierNFTs The Sablier NFTs to be priced.
-    function getNormalizedValueAggregate(SablierNFT[] calldata sablierNFTs) external view returns (uint256) {
+    function getNormalizedValueAggregate(Types.SablierNFT[] calldata sablierNFTs) external view returns (uint256) {
         uint256 totalNormalizedValue = 0;
         for (uint256 i = 0; i < sablierNFTs.length; i++) {
             totalNormalizedValue += getNormalizedValue(sablierNFTs[i]);
